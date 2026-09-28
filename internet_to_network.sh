@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+ID_VLAN=$1
+CIDR=$2
+IFAZ_GW="gw_vlan$ID_VLAN"
+IFAZ_SALIDA="ens3"
+
+# EL MASQUERADE PARA QUE SALGA A INTERNET
+sudo iptables -t nat -A POSTROUTING -s $CIDR -o $IFAZ_SALIDA -j MASQUERADE
+
+# PREENVIO E VLAN A INTERFAZ DE SALIDA
+sudo iptables -A FORWARD -i $IFAZ_GW -o $IFAZ_SALIDA -j ACCEPT
+
+echo "VLAN $ID_VLAN con salida a Internet por $IFAZ_SALIDA"
