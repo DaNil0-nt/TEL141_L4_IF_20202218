@@ -35,4 +35,7 @@ remoto $SERVER3 routing_networks.sh 100 200
 remoto $SERVER2 create_vm.sh vm100 br-int 100 5901
 remoto $SERVER2 create_vm.sh vm200 br-int 200 5902
 
+echo "Contenedor"
+remoto $SERVER1 create_container.sh c100 100 true
+
 echo "Actividad 4 LISTOP"
